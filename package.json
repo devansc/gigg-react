@@ -14,9 +14,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.19.2",
-    "mongoose": "^8.3.4"
-  },
-  "devDependencies": {
+    "mongoose": "^8.3.4",
     "axios": "^1.6.8",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5"
