@@ -8,10 +8,11 @@ function SongDetail() {
   const [song, setSong] = useState(null);
   const [newSection, setNewSection] = useState({ name: '', value: '' });
   const { id } = useParams();
+  const baseUrl = process.env.SERVER_URL || "http://localhost:9000";
 
   useEffect(() => {
     const getSong = async () => {
-      const response = await fetch(`http://localhost:9000/songs/${id}`);
+      const response = await fetch(`${baseUrl}/songs/${id}`);
       const song = await response.json();
       setSong(song);
     };
@@ -29,7 +30,7 @@ function SongDetail() {
   };
 
   const addSection = async () => {
-    const response = await fetch(`http://localhost:9000/songs/${id}`, {
+    const response = await fetch(`${baseUrl}/songs/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ function SongDetail() {
   const deleteSection = async (index) => {
     if (window.confirm('Are you sure you want to delete this section?')) {
       const updatedSections = song.sections.filter((_, i) => i !== index);
-      const response = await fetch(`http://localhost:9000/songs/${id}`, {
+      const response = await fetch(`${baseUrl}/songs/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
