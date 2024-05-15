@@ -5,7 +5,9 @@ const cors = require('cors');
 
 
 const app = express();
+console.log("Port is ", process.env.PORT);
 const port = process.env.PORT || 9000;
+console.log("Port now is ", port);
 
 app.use(cors());
 
