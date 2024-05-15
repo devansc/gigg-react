@@ -96,7 +96,7 @@ app.get('*', (req, res) => {
 });
 
 db.once('open', function() {
-  app.listen(9000, () => {
+  app.listen(port, () => {
     console.log('Listening on port 9000');
   });
 });
