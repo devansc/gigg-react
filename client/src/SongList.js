@@ -19,11 +19,14 @@ function SongList() {
   }, []);
 
   const deleteSong = async (id) => {
-    try {
-      await axios.delete(`/songs/${id}`);
-      setSongs(songs.filter(song => song._id !== id));
-    } catch (error) {
-      console.error(error);
+    const confirmDelete = window.confirm('Are you sure you want to delete this song?');
+    if (confirmDelete) {
+        try {
+            await axios.delete(`http://localhost:9000/songs/${id}`);
+            setSongs(songs.filter(song => song._id !== id));
+          } catch (error) {
+            console.error(error);
+          }
     }
   };
 

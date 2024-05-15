@@ -10,7 +10,7 @@ const port = process.env.PORT || 9000;
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://devansc:KHrNTwsXeAUfxGPe@cluster0.ojffldh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ojffldh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database connected'))
   .catch(err => console.error('Database connection error', err));
 
@@ -75,16 +75,15 @@ app.put('/songs/:id', async (req, res) => {
 });
 
 app.delete('/songs/:id', async (req, res) => {
-  const { id } = req.params;
-
   try {
-    // Assuming you're using a database, replace this with your actual delete logic
-    await db.collection('songs').deleteOne({ _id: id });
-
-    res.status(200).send({ message: 'Song deleted successfully' });
+    const result = await Song.findByIdAndDelete(req.params.id);
+    if (result) {
+      res.status(200).send({ message: 'Song deleted successfully' });
+    } else {
+      res.status(404).send({ message: 'Song not found' });
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: 'Failed to delete song' });
+    res.status(500).send({ message: 'Error deleting song' });
   }
 });
 
