@@ -8,9 +8,12 @@ import axios from 'axios';
 function SongList() {
   const [songs, setSongs] = useState([]);
 
+  const baseUrl = process.env.SERVER_URL || "http://localhost:9000";
+  console.log("Base URL is ", baseUrl);
+
   useEffect(() => {
     const getSongs = async () => {
-      const response = await fetch('http://localhost:9000/songs');
+      const response = await fetch(`${baseUrl}/songs`);
       const songs = await response.json();
       setSongs(songs);
     };
@@ -22,7 +25,7 @@ function SongList() {
     const confirmDelete = window.confirm('Are you sure you want to delete this song?');
     if (confirmDelete) {
         try {
-            await axios.delete(`http://localhost:9000/songs/${id}`);
+            await axios.delete(`${baseUrl}/songs/${id}`);
             setSongs(songs.filter(song => song._id !== id));
           } catch (error) {
             console.error(error);

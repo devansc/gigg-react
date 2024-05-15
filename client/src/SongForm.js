@@ -11,6 +11,7 @@ function SongForm() {
     const song = { title, sections: [] };
 
     const baseUrl = process.env.SERVER_URL || "http://localhost:9000";
+    console.log("Base URL is ", baseUrl);
 
     const response = await fetch(baseUrl+'/songs', {
       method: 'POST',
