@@ -10,7 +10,7 @@ function SongForm() {
     e.preventDefault();
     const song = { title, sections: [] };
 
-    const baseUrl = process.env.SERVER_URL || "http://localhost:9000";
+    const baseUrl = process.env.REACT_APP_SERVER_URL || "http://localhost:9000";
     console.log("Base URL is ", baseUrl);
 
     const response = await fetch(baseUrl+'/songs', {

@@ -8,7 +8,7 @@ import axios from 'axios';
 function SongList() {
   const [songs, setSongs] = useState([]);
 
-  const baseUrl = process.env.SERVER_URL || "http://localhost:9000";
+  const baseUrl = process.env.REACT_APP_SERVER_URL || "http://localhost:9000";
   console.log("Base URL is ", baseUrl);
 
   useEffect(() => {

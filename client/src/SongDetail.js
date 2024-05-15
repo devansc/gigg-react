@@ -8,7 +8,7 @@ function SongDetail() {
   const [song, setSong] = useState(null);
   const [newSection, setNewSection] = useState({ name: '', value: '' });
   const { id } = useParams();
-  const baseUrl = process.env.SERVER_URL || "http://localhost:9000";
+  const baseUrl = process.env.REACT_APP_SERVER_URL || "http://localhost:9000";
 
   useEffect(() => {
     const getSong = async () => {
